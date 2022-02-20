@@ -1,0 +1,18 @@
+<%- include('../includes/head.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
+
+        <div class="container">
+            <div class="jumbotron">
+                <form method="POST" action="/post-image" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="imageFile">File input</label>
+                        <input type="file" name="image" id="image">
+                        <p class="help-block">Select to upload image.</p>
+                    </div>
+                    <button type="submit" class="btn btn-default">Upload File</button>
+                </form>
+            </div>
+        </div>
+
+
+        <%- include('../includes/footer.ejs') %>
