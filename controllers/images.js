@@ -1,4 +1,9 @@
-const Image = require('../service/image');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+
+
+const imageServices = require('../service/image');
+const imageHelpers = require('../util/helpers');
 
 exports.getImage = (req, res, next) => {
     res.status(200).render('images/index', {
@@ -7,19 +12,19 @@ exports.getImage = (req, res, next) => {
 };
 
 exports.postImage = async (req, res, next) => {
-    if(!req.file){
+    if (!req.files) {
         return res.status(200).render('images/index', {
             pageTitle: 'ImagePizzle'
         })
     }
-    console.log(req.file);
-    const imageName = req.file.originalname;
-    const imagePath = req.file.path.replaceAll('\\', '/');
-    const image = new Image(imageName, imagePath );
-    // const result = await image.resizeImage(400, 400);
-    const result = await image.compressImage(10);
+    const imageDestinationFolder = imageHelpers.createFolder();
+    console.log('imageDestinationFolder:',imageDestinationFolder);
+    const result = await imageServices.resizeImagesInFolder(200, 200, req.files, imageDestinationFolder);
+    // const newResult = await imageServices.compressImagesInFolder(20, req.files, imageDestinationFolder);
+    const zippedFile = await imageServices.zipFolder(imageDestinationFolder);
     console.log(result);
+
     res.send('Done')
 
-    
+
 }
