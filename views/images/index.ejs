@@ -1,18 +1,33 @@
 <%- include('../includes/head.ejs') %>
-    <%- include('../includes/navigation.ejs') %>
+<%- include('../includes/info.ejs') %>
 
-        <div class="container">
-            <div class="jumbotron">
-                <form method="POST" action="/post-image" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="imageFile">File input</label>
-                        <input type="file" name="file" id="image" multiple required>
-                        <p class="help-block">Select to upload image.</p>
-                    </div>
-                    <button type="submit" class="btn btn-default">Upload Files</button>
-                </form>
-            </div>
-        </div>
+    <div class='container'>
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-bs-toggle="tab" href="#android">ANDROID</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#web">WEB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#ios">IOS</a>
+            </li>
+          </ul>
+    </div>
+
+    <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="android" class="container tab-pane active"><br>
+        <%- include('../includes/android.ejs') %>
+    </div>
+    <div id="web" class="container tab-pane fade"><br>
+        <%- include('../includes/web.ejs') %>
+    </div>
+    <div id="ios" class="container tab-pane fade"><br>
+        <%- include('../includes/ios.ejs') %>
+    </div>
+  </div>
+        
 
 
         <%- include('../includes/footer.ejs') %>
