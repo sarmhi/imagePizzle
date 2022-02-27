@@ -15,25 +15,30 @@ async function resizeImage() {
 }
 
 const folderPath = path.join(__dirname, '..', '..', '..', '..', 'Pictures', 'Camera Roll');
-const files = fs.readdirSync(folderPath).map(fileName => {
-  return path.join(folderPath, fileName).replaceAll('\\', '/');
-})
-console.log(files);
+// const files = fs.readdirSync(folderPath).map(fileName => {
+//   return path.join(folderPath, fileName).replaceAll('\\', '/');
+// })
+// console.log(files);
 
 const zipFolder = (folderPath) => {
   const zip = new admzip();
   const outputFilePath = path.join(__dirname, '..', '..', '..', '..', 'Pictures', 'Camera Roll', 'folder' + uuidv4().split('-')[0] + '.zip')
   if (folderPath) {
-    const files = fs.readdirSync(folderPath).map(fileName => {
-      return path.join(folderPath, fileName).replaceAll('\\', '/');
+    fs.readdir(folderPath, (err, files)=>{
+      if(err) {
+        return console.log('Error:',err)
+      }
+      const newFiles = files.map(fileName => {
+        return path.join(folderPath, fileName).replaceAll('\\', '/');
+      });
+
+      newFiles.forEach((file) => {
+        console.log('File#:',file)
+        zip.addLocalFile(file);
+      });
+      zip.writeZip(outputFilePath);
     })
-    files.forEach((file) => {
-      console.log(file)
-      zip.addLocalFile(file);
-    });
-    fs.writeFile(outputFilePath, zip.toBuffer(), (err, data) => {
-      return { success: true, folder: outputFilePath.replaceAll('\\', '/') };
-    });
+    
   }
 }
-console.log(zipFolder(path.join(__dirname, '..', 'images', 'foldereb7d4f15')));
+console.log(zipFolder(folderPath));

@@ -1,6 +1,31 @@
 <div class="container">
     <div class="mt-4 p-5 bg-dark text-white rounded">
-        <form method="POST" action="/post-image" enctype="multipart/form-data">
+        <h3 class="text-center">SELECT IMAGE FEATURE FOR ANDROID</h3>
+        <form method="POST" action="/resize" enctype="multipart/form-data">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="LDPI" name="LDPI" value="true" checked>
+                <label class="form-check-label">LDPI => (36 x 36)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="MDPI" name="MDPI" value="true" >
+                <label class="form-check-label">MDPI => (48 x 48)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="HDPI" name="HDPI" value="true">
+                <label class="form-check-label">HDPI => (72 x 72)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="XHDPI" name="XHDPI" value="true">
+                <label class="form-check-label">XHDPI => (96 x 96)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="XXHDPI" name="XXHDPI" value="true">
+                <label class="form-check-label">XXHDPI => (144 x 144)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="XXXHDPI" name="XXXHDPI" value="true">
+                <label class="form-check-label">XXXHDPI => (192 x 192)</label>
+              </div>
             <div class="form-group">
                 <label for="imageFile">File input</label>
                 <input type="file" name="file" id="image" multiple required>

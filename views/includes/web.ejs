@@ -1,6 +1,20 @@
 <div class="container">
     <div class="mt-4 p-5 bg-dark text-white rounded">
-        <form method="POST" action="/post-image" enctype="multipart/form-data">
+        <h3 class="text-center">SELECT COMPRESSION LEVEL FOR WEB</h3>
+        <form method="POST" action="/compress" enctype="multipart/form-data">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="high" checked>
+                <label class="form-check-label" for="radio1">Compression level 1(High compression, Low quality)</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="medium" value="50">
+                <label class="form-check-label" for="radio2">Compression level 2(Medium compression, Medium
+                    quality)</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio3" name="optradio" value="low" >
+                <label class="form-check-label" for="radio3">Compression level 1(Low compression, High quality)</label>
+            </div>
             <div class="form-group">
                 <label for="imageFile">File input</label>
                 <input type="file" name="file" id="image" multiple required>

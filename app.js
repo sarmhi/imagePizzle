@@ -47,14 +47,15 @@ app.use(imageRoutes);
 app.get('/500', errorControllers.get500);
 app.use(errorControllers.get404);
 
-app.use((req, res, next, error) => {
+app.use((error, req, res, next) => {
     console.log(error);
-    res.render('500', {
+    res.status(500).render('500', {
         pageTitle: 'Error!'
     })
 })
 
+const PORT = process.env.PORT || 3000
 
-app.listen(process.env.PORT || 3000, ()=>{
-    console.log('App is listening on port 3000');
+app.listen(PORT, ()=>{
+    console.log(`App is listening on port ${PORT}`);
 });

@@ -6,6 +6,9 @@ const router = express.Router();
 
 router.get('', imageControllers.getImage);
 
-router.post('/post-image', imageControllers.postImage);
+router.post('/resize', imageControllers.resizeImages);
+
+router.post('/compress', imageControllers.compressImages);
+
 
 module.exports = router;
