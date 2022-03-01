@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const imageRoutes = require('./routes/images');
 const errorControllers = require('./controllers/error');
+const jobControllers = require('./controllers/cron');
 
 const maxSize = 20 * 1024 * 1024;
 
@@ -43,6 +44,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 app.use(imageRoutes);
+app.use(jobControllers.startJob);
 
 app.get('/500', errorControllers.get500);
 app.use(errorControllers.get404);
