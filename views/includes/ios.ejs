@@ -1,6 +1,20 @@
 <div class="container">
     <div class="mt-4 p-5 bg-dark text-white rounded">
-        <form method="POST" action="/post-image" enctype="multipart/form-data">
+        <h3 class="text-center">SELECT IMAGE FEATURE FOR IOS</h3>
+        <p class="text-center">If none is checked, @X feature would be used</p>
+        <form method="POST" action="/resize-ios" enctype="multipart/form-data">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="oneX" name="oneX" value="true" checked>
+                <label class="form-check-label">@X => (100 x 100)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="twoX" name="twoX" value="true" >
+                <label class="form-check-label">@2X => (200 x 200)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="threeX" name="threeX" value="true">
+                <label class="form-check-label">@3X => (300 x 300)</label>
+              </div>
             <div class="form-group">
                 <label for="imageFile">File input</label>
                 <input type="file" name="file" id="image" multiple required>
