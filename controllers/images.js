@@ -35,7 +35,7 @@ exports.resizeImagesAndroid = async (req, res, next) => {
             pageTitle: 'ImagePizzle'
         })
     };
-
+    console.log('Starting')
     try {
         const keys = Object.keys(req.body);
         if(keys.length === 0){
@@ -50,9 +50,11 @@ exports.resizeImagesAndroid = async (req, res, next) => {
             resizedImages = await imageServices.resizeImagesInFolder(resizeValue, resizeValue, req.files, imageDestinationFolder);
             zipArray.push(...resizedImages.imagePaths);
         }
+        console.log('Resizing')
 
 
         const zippedFolder = await imageServices.zipFolder(zipArray, resizedImages.imageFolder);
+        console.log('Done')
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
