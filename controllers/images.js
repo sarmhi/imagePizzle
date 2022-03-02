@@ -35,6 +35,7 @@ exports.resizeImagesAndroid = async (req, res, next) => {
             pageTitle: 'ImagePizzle'
         })
     };
+    console.log(req.files);
     console.log('Starting')
     try {
         const keys = Object.keys(req.body);
@@ -55,6 +56,8 @@ exports.resizeImagesAndroid = async (req, res, next) => {
 
         const zippedFolder = await imageServices.zipFolder(zipArray, resizedImages.imageFolder);
         console.log('Done')
+        console.log(req.header('host'))
+        console.log(zippedFolder.Url)
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
