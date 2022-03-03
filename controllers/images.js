@@ -164,14 +164,14 @@ exports.resizeImagesIos = async (req, res, next) => {
             domain: req.header('host'),
             url: zippedFolder.Url
         });
-        req.files.forEach((file) => {
-            fs.unlinkSync(file.path)
-        });
+        // req.files.forEach((file) => {
+        //     fs.unlinkSync(file.path)
+        // });
     } catch (err) {
         const error = new Error(err);
-        req.files.forEach((file) => {
-            fs.unlinkSync(file.path)
-        });
+        // req.files.forEach((file) => {
+        //     fs.unlinkSync(file.path)
+        // });
         return next(error);
     }
 };
