@@ -64,13 +64,15 @@ exports.resizeImagesAndroid = async (req, res, next) => {
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
-            url: zippedFolder.Url
+            url: zippedFolder.Url,
+            zipfile: zippedFolder.folder
         });
         req.files.forEach((file) => {
             fs.unlinkSync(file.path);
         });
     } catch (err) {
         const error = new Error(err);
+        console.log('An error occured in resizeImagesAndroid controller');
         req.files.forEach((file) => {
             fs.unlinkSync(file.path)
         });
@@ -112,13 +114,15 @@ exports.compressImages = async (req, res, next) => {
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
-            url: zippedFolder.Url
+            url: zippedFolder.Url,
+            zipfile: zippedFolder.folder
         });
         req.files.forEach((file) => {
             fs.unlinkSync(file.path)
         });
     } catch (err) {
         const error = new Error(err);
+        console.log('An error occured in compressImages controller');
         req.files.forEach((file) => {
             fs.unlinkSync(file.path)
         });
@@ -162,16 +166,29 @@ exports.resizeImagesIos = async (req, res, next) => {
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
-            url: zippedFolder.Url
+            url: zippedFolder.Url,
+            zipfile: zippedFolder.folder
         });
-        // req.files.forEach((file) => {
-        //     fs.unlinkSync(file.path)
-        // });
+        req.files.forEach((file) => {
+            fs.unlinkSync(file.path)
+        });
     } catch (err) {
         const error = new Error(err);
-        // req.files.forEach((file) => {
-        //     fs.unlinkSync(file.path)
-        // });
+        console.log('An error occured in resizeios controller');
+        req.files.forEach((file) => {
+            fs.unlinkSync(file.path)
+        });
         return next(error);
     }
 };
+
+exports.downloadZip = (req, res, next) => {
+    console.log('Starting download');
+    res.download(req.body.zipFile,(err) => {
+        if(err){
+          const error = new Error(err);
+          return next(error);
+        }
+    })
+
+}

@@ -80,14 +80,14 @@ exports.zipFolder = async (imagePaths, imageFolder) => {
 
             const zipFile = outputFilePath.replaceAll('\\', '/');
             console.log('Zip File:', zipFile);
-            // imageHelpers.deleteImages(imagePaths, imageFolder);
+            imageHelpers.deleteImages(imagePaths, imageFolder);
             return { success: true, folder: zipFile , Url: zipFile.substr(5, 25) };
             // Url: zipFile.substr(48, 25) in development 
             
         }
     } catch (err) {
         const error = new Error(err);
-        // imageHelpers.deleteImages(imagePaths, imageFolder);
+        imageHelpers.deleteImages(imagePaths, imageFolder);
         return error;
     }
 

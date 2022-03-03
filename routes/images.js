@@ -12,5 +12,7 @@ router.post('/compress', imageControllers.compressImages);
 
 router.post('/resize-ios', imageControllers.resizeImagesIos);
 
+router.post('/download-image', imageControllers.downloadZip);
+
 
 module.exports = router;

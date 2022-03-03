@@ -1,17 +1,24 @@
 <%- include('../includes/head.ejs') %>
-<%- include('../includes/info.ejs') %>
+    <%- include('../includes/info.ejs') %>
 
-    <div class='container'>
-        <div class="mt-4 p-5 bg-dark text-white rounded text-center">
-            <h2>Please click on the icon below to download your files</h2>
-            <a href="http://<%= domain %>/<%= url %>" download>
-                <i class="bi-folder" style="font-size:60px;color:rgb(30, 233, 12);"></i>
-            </a>
-            <p>Click <a href="/">here</a> to return to the home page after downloading. </p>
+        <div class='container'>
+            <div class="mt-4 p-5 bg-dark text-white rounded text-center">
+                <h2>Please click on the icon below to download your files</h2>
+                <form method="POST" action="/download-image">  
+                    <input type="hidden" id="zipFile" name="zipFile" value="<%= zipfile %>">
+
+                    <button type="submit" class="btn btn-dark">
+                        <i class="bi-folder" style="font-size:60px;color:rgb(30, 233, 12);"></i>
+                    </button>
+                </form>
+
+
+
+                <p>Click <a href="/">here</a> to return to the home page after downloading. </p>
+            </div>
         </div>
-    </div>
 
-        
+
 
 
         <%- include('../includes/footer.ejs') %>
