@@ -35,11 +35,12 @@ exports.resizeImagesAndroid = async (req, res, next) => {
             pageTitle: 'ImagePizzle'
         })
     };
-    console.log(req.files);
+    console.log('Uploaded Files:', req.files);
+    console.log('Uploaded Body:', req.body);
     console.log('Starting')
     try {
         const keys = Object.keys(req.body);
-        if(keys.length === 0){
+        if (keys.length === 0) {
             keys.push('LDPI');
         }
         const imageDestinationFolder = imageHelpers.createFolder();
@@ -48,23 +49,25 @@ exports.resizeImagesAndroid = async (req, res, next) => {
         let resizeValue;
         for (let key of keys) {
             resizeValue = resizeValues[key];
+            console.log('Resizing');
             resizedImages = await imageServices.resizeImagesInFolder(resizeValue, resizeValue, req.files, imageDestinationFolder);
             zipArray.push(...resizedImages.imagePaths);
         }
-        console.log('Resizing')
+        console.log("Array of images to zip:", zipArray);
+        
 
 
         const zippedFolder = await imageServices.zipFolder(zipArray, resizedImages.imageFolder);
-        console.log('Done')
         console.log(req.header('host'))
-        console.log(zippedFolder.Url)
+        console.log('Zipping return value:', zippedFolder);
+        console.log('Done');
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
             url: zippedFolder.Url
         });
         req.files.forEach((file) => {
-            fs.unlinkSync(file.path)
+            fs.unlinkSync(file.path);
         });
     } catch (err) {
         const error = new Error(err);
@@ -81,10 +84,13 @@ exports.compressImages = async (req, res, next) => {
             pageTitle: 'ImagePizzle'
         })
     };
+    console.log('Uploaded Files:', req.files);
+    console.log('Uploaded Body:', req.body);
+    console.log('Starting');
 
     try {
         const keys = Object.values(req.body);
-        if(keys.length === 0){
+        if (keys.length === 0) {
             keys.push('medium');
         }
         const imageDestinationFolder = imageHelpers.createFolder();
@@ -93,12 +99,16 @@ exports.compressImages = async (req, res, next) => {
         let compressionLevel;
         for (let key of keys) {
             compressionLevel = compressionLevels[key];
+            console.log('Compressing..');
             compressedImages = await imageServices.compressImagesInFolder(compressionLevel, req.files, imageDestinationFolder);
             zipArray.push(...compressedImages.imagePaths);
         }
-
+        console.log("Array of images to zip:", zipArray);
 
         const zippedFolder = await imageServices.zipFolder(zipArray, compressedImages.imageFolder);
+        console.log(req.header('host'))
+        console.log('Zipping return value:', zippedFolder);
+        console.log('Done');
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),
@@ -124,10 +134,13 @@ exports.resizeImagesIos = async (req, res, next) => {
             pageTitle: 'ImagePizzle'
         })
     };
+    console.log('Uploaded Files:', req.files);
+    console.log('Uploaded Body:', req.body);
+    console.log('Starting');
 
     try {
         const keys = Object.keys(req.body);
-        if(keys.length === 0){
+        if (keys.length === 0) {
             keys.push('oneX');
         }
         const imageDestinationFolder = imageHelpers.createFolder();
@@ -136,12 +149,16 @@ exports.resizeImagesIos = async (req, res, next) => {
         let resizeValue;
         for (let key of keys) {
             resizeValue = resizeValues[key];
+            console.log('Resizing...');
             resizedImages = await imageServices.resizeImagesInFolder(resizeValue, resizeValue, req.files, imageDestinationFolder);
             zipArray.push(...resizedImages.imagePaths);
         }
-
+        console.log("Array of images to zip:", zipArray);
 
         const zippedFolder = await imageServices.zipFolder(zipArray, resizedImages.imageFolder);
+        console.log(req.header('host'))
+        console.log('Zipping return value:', zippedFolder);
+        console.log('Done');
         res.render('images/download', {
             pageTitle: 'ImagePizzle',
             domain: req.header('host'),

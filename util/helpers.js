@@ -22,9 +22,11 @@ exports.createFolder = () => {
         if (!fs.existsSync(folderName)) {
             fs.mkdirSync(folderName)
         }
+        console.log('Folder created successfully');
         return folderName;
     } catch (err) {
-        console.error(err)
+        const error = new Error(err);
+        return error;
     }
 };
 
@@ -41,6 +43,7 @@ exports.resizeImage = async (heigth, width, imagePath, newImagePath) => {
                 height: heigth
             })
             .toFile(newImagePath)
+        console.log('Image resized Successfully.');
         return newImagePath;
     } catch (err) {
         const error = new Error(err);
@@ -54,6 +57,7 @@ exports.compressImage = async (quality, extension, imagePath, newImagePath) => {
             await sharp(imagePath)
                 .toFormat("png", { compressionLevel: 9, quality: quality / 10 })
                 .toFile(newImagePath);
+            console.log('Image compressed Successfully.');
             return newImagePath
         }
         await sharp(imagePath)
@@ -70,13 +74,15 @@ exports.deleteImages = (imagepath, imageFolder) => {
     try {
         if (imagepath.length !== 0) {
             imagepath.forEach((file) => {
-                fs.unlinkSync(file)
+                fs.unlinkSync(file);
+                console.log('Image deleted Successfully.');
             });
         }
 
         if (imageFolder) {
             fs.rmdir(imageFolder, err => {
                 if (err) console.log(err);
+                console.log('Folder deleted Successfully.');
             })
         }
         return 'done';

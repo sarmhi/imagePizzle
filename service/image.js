@@ -19,7 +19,9 @@ exports.resizeImagesInFolder = async (heigth, width, imagePathArray, outFolderPa
         for (let file of imagePathArray) {
             const extension = file.originalname.split('.')[1];
             const imagePath = path.join(rootdir, file.path.replaceAll('\\', '/'));
+            console.log('Old Image path:', imagePath);
             newImagePath = path.join(outFolderPath, uuidv4() + 'resized.' + extension);
+            console.log('New Image path:', newImagePath);
             imagePaths.push(newImagePath.replaceAll('\\', '/'));
             await imageHelpers.resizeImage(heigth, width, imagePath, newImagePath);
         }
@@ -47,7 +49,9 @@ exports.compressImagesInFolder = async (quality, imagePathArray, outFolderPath) 
         for (let file of imagePathArray) { 
             const extension = file.originalname.split('.')[1];
             const imagePath = path.join(rootdir, file.path.replaceAll('\\', '/'));
+            console.log('Old Image path:', imagePath);
             newImagePath = path.join(outFolderPath, uuidv4() + 'compressed.' + extension);
+            console.log('New Image path:', newImagePath);
             imagePaths.push(newImagePath.replaceAll('\\', '/'));
             await imageHelpers.compressImage(quality, extension, imagePath, newImagePath)
         }        
@@ -72,7 +76,10 @@ exports.zipFolder = async (imagePaths, imageFolder) => {
             });
 
             zip.writeZip(outputFilePath);
+            console.log('Zipping..');
+
             const zipFile = outputFilePath.replaceAll('\\', '/');
+            console.log('Zip File:', zipFile);
             imageHelpers.deleteImages(imagePaths, imageFolder);
             return { success: true, folder: zipFile , Url: zipFile.substr(48, 25) };
             

@@ -46,7 +46,17 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(helmet());
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             defaultSrc: ["'self'"],
+//             scriptSrc: ["'self'", 'cdn.jsdelivr.net'],
+//             styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net'],
+//             fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net'],
+//             mediaSrc: ["'self'", 'image3pc.herokuapp.com',]
+//         }
+//     })
+// );
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream }));
 
